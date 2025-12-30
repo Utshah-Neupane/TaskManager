@@ -1,0 +1,47 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms.validators import Length, DataRequired, Email, EqualTo, ValidationError
+from task.models import TaskStatus, TaskPriority, UserRole, User
+
+
+
+class RegisterForm(FlaskForm):
+    
+    def validate_username(self, username_to_check):
+        user = User.query.filter_by(username=username_to_check.data).first()
+        
+        if user:
+            raise ValidationError("Username already exists! Please try a different username.")
+        
+    
+    def validate_email(self, email_to_check):
+        email = User.query.filter_by(email=email_to_check.data).first()
+    
+        if email:
+            raise ValidationError("Email address already exists! Please try a different email address.")
+    
+    
+    username = StringField(label='User Name:', validators=[Length(min=2, max=30), DataRequired()])
+    email = StringField(label='Email Address: ', validators=[Email(), DataRequired()])
+    password = PasswordField(label='Password: ', validators=[Length(min=6, max=64), DataRequired()])
+    confirm_password = PasswordField(label='Confirm Password: ', validators=[DataRequired(), EqualTo("password")])
+    role = SelectField(label="Role: ", choices=[(UserRole.USER.value, "User"), (UserRole.ADMIN.value, "Admin")])
+    submit = SubmitField(label='Create Account')
+    
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

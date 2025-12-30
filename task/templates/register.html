@@ -1,4 +1,4 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 
 {% block title %}
     Register Page
@@ -6,4 +6,43 @@
 
 
 {% block content %}
+<body class = 'text-center'>
+
+    <div class="container">
+        <form method="POST" class = 'form-register' style = "color:white">
+            {{ form.hidden_tag() }}
+
+            <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Denver_skyline.jpg" 
+            alt="", height="200", width="200", style="border-radius: 50%;">
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please Create your Account
+            </h1>
+            <br>
+
+            {{ form.username.label() }}
+            {{ form.username(class = "form-control", placeholder = 'User Name') }}
+
+            {{ form.email.label() }}
+            {{ form.email(class = "form-control", placeholder = 'Email Address') }}
+
+            {{ form.role.label() }}
+            {{ form.role(class="form-select") }}
+
+            {{ form.password.label() }}
+            {{ form.password(class = "form-control", placeholder = 'Password') }}
+
+            {{ form.confirm_password.label() }}
+            {{ form.confirm_password(class = "form-control", placeholder = 'Confirm Password') }}
+
+            <br>
+
+            <div class="checkbox mb-3">
+               <h6>Already have an account?</h6>
+               <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
+            </div>
+
+            {{ form.submit(class = "btn-lg btn-block btn-primary")}}
+        </form>
+    </div>
+</body>
 {% endblock %}

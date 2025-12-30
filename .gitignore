@@ -11,7 +11,9 @@
 *.sln.docstates
 *.env
 
-*for_me.txt
+for_me.txt
+__init__.py
+
 
 
 
